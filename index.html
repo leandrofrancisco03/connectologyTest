@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectology | Soluciones de Automatización e IA</title>
+    <meta name="description" content="Expertos en automatización de procesos con n8n, Agentes IA y RAG. Optimizamos tu negocio conectando tus herramientas favoritas.">
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --primary: #FF6B6B; /* Acento coral/rojo moderno */
+            --secondary: #2d3436; /* Texto oscuro */
+            --accent-blue: #0984e3; /* Azul técnico */
+            --bg-light: #fdfdfd;
+            --bg-section: #f4f7f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--secondary);
+            background-color: var(--bg-light);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- HEADER --- */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--secondary);
+            letter-spacing: -1px;
+        }
+        .logo span { color: var(--primary); }
+
+        .nav-links a {
+            margin-left: 25px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        
+        .cta-button {
+            background-color: var(--secondary);
+            color: #fff !important;
+            padding: 8px 20px;
+            border-radius: 50px;
+        }
+        .cta-button:hover { background-color: var(--primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 160px 20px 100px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(45deg, #2d3436, #0984e3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #636e72;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            transition: transform 0.2s;
+        }
+        .hero-btn:hover { transform: translateY(-3px); }
+
+        /* --- STACK SECTION --- */
+        .tech-stack {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .badge {
+            background: #eee;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* --- SERVICES GRID --- */
+        .services {
+            background-color: var(--bg-section);
+            padding: 80px 20px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { color: #636e72; font-size: 1rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #1e272e;
+            color: #bdc3c7;
+            padding: 60px 20px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #353b48;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+        .footer-links a:hover { color: var(--primary); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Menú simplificado para móvil */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Connectology<span>.</span></div>
+            <div class="nav-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#tecnologia">Tecnologías</a>
+                <a href="mailto:contacto@tucorreo.com" class="cta-button">Contáctanos</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Automatiza tu negocio con Inteligencia Artificial</h1>
+        <p>Transformamos tareas manuales en flujos inteligentes. Especialistas en n8n, Agentes IA y sistemas RAG para empresas que buscan escalar.</p>
+        <a href="mailto:contacto@tucorreo.com" class="hero-btn">Agendar Consultoría</a>
+    </section>
+
+    <section class="tech-stack" id="tecnologia">
+        <p>Potenciamos tus ideas usando:</p>
+        <div class="tech-badges">
+            <span class="badge">n8n</span>
+            <span class="badge">OpenAI / LLMs</span>
+            <span class="badge">RAG Systems</span>
+            <span class="badge">React / Next.js</span>
+            <span class="badge">Supabase</span>
+            <span class="badge">Power BI</span>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">¿Qué podemos automatizar?</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="icon">⚡</span>
+                    <h3>Flujos de Trabajo en n8n</h3>
+                    <p>Conectamos tus aplicaciones (CRM, Correo, Sheets, Slack) para que los datos fluyan automáticamente sin intervención humana.</p>
+                </div>
+                
+                <div class="card">
+                    <span class="icon">🤖</span>
+                    <h3>Agentes de IA Personalizados</h3>
+                    <p>Creamos asistentes inteligentes que entienden tu negocio, responden a clientes 24/7 y ejecutan acciones complejas.</p>
+                </div>
+                
+                <div class="card">
+                    <span class="icon">📚</span>
+                    <h3>Sistemas RAG (Chat con tus Datos)</h3>
+                    <p>Entrena a la IA con tus propios PDFs y documentos. Ideal para consultoría interna, soporte técnico o análisis legal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Connectology</h3>
+            <p>Llevando la transformación digital al siguiente nivel.</p>
+            
+            <div class="footer-links">
+                <p>&copy; <span id="year">2025</span> Todos los derechos reservados.</p>
+                <br>
+                <a href="https://leandrofrancisco03.github.io/Politicas/" target="_blank">Política de Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').innerText = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
