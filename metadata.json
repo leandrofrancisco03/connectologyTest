@@ -1,0 +1,6 @@
+{
+  "name": "ConnectologyIA",
+  "description": "Sitio web oficial de ConnectologyIA, agencia de Automatización e Inteligencia Artificial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

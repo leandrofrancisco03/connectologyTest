@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "slug": "impacto-ia-pymes-2026",
+    "title": "El Impacto Real de la IA en las PyMEs este 2026",
+    "excerpt": "Descubre cómo la Inteligencia Artificial ha dejado de ser exclusiva de grandes corporaciones para convertirse en una herramienta accesible y vital para pequeñas empresas.",
+    "content": "La Inteligencia Artificial ha madurado rápidamente. Lo que hace unos años requería equipos de científicos de datos y presupuestos millonarios, hoy está disponible a través de APIs y herramientas No-Code.\n\nPara las PyMEs, esto significa una democratización sin precedentes. Ya no se trata de si debes adoptar IA, sino de cuándo y cómo. Desde automatizar respuestas de servicio al cliente hasta predecir inventario, las aplicaciones son vastas.\n\nEl mayor impacto que estamos viendo en 2026 es la 'IA de nicho'. Agentes entrenados específicamente en los procesos internos de una empresa, capaces de interactuar con el CRM, ERP y canales de comunicación simultáneamente, reduciendo horas de trabajo manual a segundos.",
+    "date": "2026-07-01",
+    "seoKeywords": ["Inteligencia Artificial", "PyMEs", "Tendencias 2026", "Automatización"],
+    "author": "Equipo ConnectologyIA",
+    "imageUrl": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    "id": "2",
+    "slug": "orquestacion-n8n-vs-zapier",
+    "title": "Orquestación de Datos: Por qué preferimos n8n sobre alternativas comerciales",
+    "excerpt": "Análisis profundo sobre los costos ocultos de herramientas como Zapier y Make, y por qué implementamos arquitecturas basadas en n8n para nuestros clientes.",
+    "content": "Cuando una empresa comienza a automatizar, plataformas como Zapier o Make parecen la opción obvia por su interfaz amigable. Sin embargo, a medida que el negocio escala, el modelo de precios basado en 'tareas' o 'operaciones' se vuelve restrictivo y costoso.\n\nAquí es donde entra n8n. Como herramienta de código abierto (fair-code), permite alojar la automatización en servidores propios o en la nube, eliminando el pago por ejecución.\n\nEn ConnectologyIA, implementamos arquitecturas basadas en n8n porque ofrecen flexibilidad total, integración profunda mediante webhooks personalizados y, lo más importante, costos predecibles que no castigan el crecimiento de tu empresa.",
+    "date": "2026-06-15",
+    "seoKeywords": ["n8n", "Automatización", "Zapier", "Make", "Reducción de Costos"],
+    "author": "Equipo ConnectologyIA",
+    "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    "id": "3",
+    "slug": "agentes-ia-atencion-cliente",
+    "title": "De Chatbots a Agentes IA Autónomos en Atención al Cliente",
+    "excerpt": "La evolución de la atención automatizada: cómo los nuevos agentes basados en LLMs (Modelos de Lenguaje Grande) están revolucionando el soporte.",
+    "content": "Todos odiamos los chatbots tradicionales basados en árboles de decisión estrictos (Presiona 1 para ventas, 2 para soporte). Eran frustrantes y rara vez resolvían problemas complejos.\n\nHoy, la arquitectura ha cambiado. Utilizando frameworks como LangChain o LangGraph conectados a modelos como GPT-4 o Claude 3, construimos 'Agentes Autónomos'. Estos sistemas entienden el contexto, pueden consultar bases de datos en tiempo real (por ejemplo, buscar el estado de un pedido en Shopify) y formular respuestas humanas y precisas.\n\nUn agente bien implementado no solo ahorra costos, sino que puede aumentar las ventas al ofrecer respuestas instantáneas 24/7 sin la fricción de los sistemas antiguos.",
+    "date": "2026-05-28",
+    "seoKeywords": ["Agentes IA", "Chatbots", "LLM", "Atención al Cliente", "LangChain"],
+    "author": "Equipo ConnectologyIA",
+    "imageUrl": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    "id": "4",
+    "slug": "desarrollo-web-moderno-nextjs",
+    "title": "El estándar web 2026: Por qué el rendimiento es tu mejor vendedor",
+    "excerpt": "Tener una web ya no es suficiente. Analizamos por qué la velocidad de carga y la arquitectura moderna son cruciales para el SEO y la conversión.",
+    "content": "Una página web lenta cuesta dinero. En 2026, los motores de búsqueda penalizan severamente los sitios con mala experiencia de usuario (Core Web Vitals). Si tu web tarda más de 3 segundos en cargar, estás perdiendo más del 50% de tus visitantes.\n\nPor eso en ConnectologyIA nos enfocamos en arquitecturas modernas (Next.js, React, Astro) que ofrecen tiempos de carga casi instantáneos. No se trata solo de verse bien, se trata de una base técnica sólida que permita a los motores de búsqueda indexar tu contenido eficientemente y a los usuarios interactuar sin fricción.\n\nInvertir en una plataforma web moderna es, en esencia, invertir en tu canal de ventas más importante.",
+    "date": "2026-05-10",
+    "seoKeywords": ["Desarrollo Web", "Next.js", "SEO", "Rendimiento Web", "Core Web Vitals"],
+    "author": "Equipo ConnectologyIA",
+    "imageUrl": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=800"
+  }
+]
