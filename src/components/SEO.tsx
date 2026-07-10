@@ -8,8 +8,8 @@ interface SEOProps {
 }
 
 export function SEO({ title, description, keywords, schema }: SEOProps) {
-  const defaultTitle = "ConnectologyIA | Automatización e Inteligencia Artificial";
-  const defaultDescription = "Agencia de Automatización e Inteligencia Artificial. Implementamos ecosistemas tecnológicos a tu medida, agentes inteligentes y desarrollo web.";
+  const defaultTitle = "Automatización con IA y n8n en Perú | ConnectologyIA";
+  const defaultDescription = "Automatizamos tu negocio con Agentes IA, n8n y Python. Workflows inteligentes a medida. ¿Listo para ahorrar tiempo y escalar? Contáctanos hoy.";
   const defaultKeywords = ["Inteligencia Artificial", "Automatización", "Agentes IA", "LangChain", "n8n", "Desarrollo Web"];
   
   const siteTitle = title ? `${title} | ConnectologyIA` : defaultTitle;
