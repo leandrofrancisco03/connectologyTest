@@ -26,7 +26,7 @@ export function Contact() {
 
     try {
       // URL del Webhook de n8n
-      const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+      const webhookUrl = import.meta.env.PUBLIC_N8N_WEBHOOK_URL;
 
       const response = await fetch(webhookUrl, {
         method: 'POST',
