@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { About } from '../components/About';
+
+const title = "Sobre ConnectologyIA | Expertos en automatización e IA";
+const description = "Conoce a ConnectologyIA y nuestra forma de crear automatizaciones, agentes de IA e integraciones a medida para empresas de Perú y Latinoamérica.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <h1 class="text-4xl font-extrabold text-white text-center">Sobre Nosotros</h1>
+    </div>
+    <About client:visible />
+  </main>
+</Layout>

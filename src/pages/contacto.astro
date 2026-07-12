@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Contact } from '../components/Contact';
+
+const title = "Contacta una agencia de automatización IA | ConnectologyIA";
+const description = "Cuéntanos qué proceso necesitas automatizar y recibe una evaluación inicial para implementar agentes de IA, n8n o integraciones a medida.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <h1 class="text-4xl font-extrabold text-white text-center">Contacto</h1>
+      <p class="text-xl text-slate-400 text-center mt-4 max-w-2xl mx-auto">
+        ¿Listo para transformar tu negocio? Escríbenos y agendemos una evaluación inicial gratuita.
+      </p>
+    </div>
+    <Contact client:visible />
+  </main>
+</Layout>

@@ -1,4 +1,4 @@
-import { Bot, Workflow, Code } from 'lucide-react';
+import { Bot, Workflow, Code, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function Services() {
@@ -6,20 +6,23 @@ export function Services() {
     {
       icon: <Bot className="w-6 h-6 text-cyan-400" />,
       iconBg: "bg-cyan-500/10",
-      title: "Agentes IA",
+      title: "Agentes de Inteligencia Artificial",
+      href: "/servicios/agentes-de-inteligencia-artificial",
       description: "Desarrollamos desde chatbots básicos hasta agentes autónomos avanzados con LangChain y LangGraph que interactúan con tus sistemas internos."
     },
     {
       icon: <Workflow className="w-6 h-6 text-blue-400" />,
       iconBg: "bg-blue-500/10",
-      title: "Automatización",
+      title: "Automatización con n8n y Python",
+      href: "/servicios/automatizacion-con-n8n",
       description: "Integraciones de APIs, scripts en Python y orquestación pura utilizando n8n para conectar tus herramientas sin costos recurrentes excesivos."
     },
     {
       icon: <Code className="w-6 h-6 text-indigo-400" />,
       iconBg: "bg-indigo-500/10",
-      title: "Desarrollo Web",
-      description: "Creación de páginas web ultrarrápidas y optimizadas utilizando Next.js, React o WordPress, diseñadas para escalar tu negocio."
+      title: "Integraciones y APIs",
+      href: "/servicios/integraciones-y-apis",
+      description: "Conectamos todos tus sistemas corporativos mediante APIs, eliminando silos de información y trabajo manual."
     }
   ];
 
@@ -39,15 +42,18 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-slate-900/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors group"
+              className="bg-slate-900/40 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors group flex flex-col"
             >
               <div className={`${service.iconBg} w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                 {service.icon}
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
+              <p className="text-sm text-slate-400 leading-relaxed mb-6 flex-grow">
                 {service.description}
               </p>
+              <a href={service.href} className="inline-flex items-center text-sm font-medium text-cyan-400 hover:text-cyan-300">
+                Saber más <ArrowRight className="w-4 h-4 ml-1" />
+              </a>
             </motion.div>
           ))}
         </div>

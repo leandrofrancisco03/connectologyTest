@@ -5,10 +5,10 @@ import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
-    
+
     const target = e.target as typeof e.target & {
       nombre: { value: string };
       correo: { value: string };
@@ -27,7 +27,7 @@ export function Contact() {
     try {
       // URL del Webhook de n8n
       const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
-      
+
       const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,12 +44,12 @@ export function Contact() {
       console.error("Error conectando al webhook:", error);
       setStatus("error");
     }
-    
+
     // Auto reset status after 5 seconds if success or error
     setTimeout(() => {
-        if(status === "success" || status === "error") {
-            setStatus("idle");
-        }
+      if (status === "success" || status === "error") {
+        setStatus("idle");
+      }
     }, 5000);
   };
 
@@ -57,7 +57,7 @@ export function Contact() {
     <section id="contacto" className="py-24 bg-[#030712] relative overflow-hidden">
       {/* Glow effect */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-      
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Contacto Estratégico</h2>
@@ -94,7 +94,7 @@ export function Contact() {
                 />
               </div>
             </div>
-            
+
             <div className="space-y-1">
               <input
                 type="tel"
@@ -127,12 +127,12 @@ export function Contact() {
               {status === "error" && <><AlertCircle className="w-5 h-5" /> Error al enviar</>}
             </button>
             <p className="text-[10px] text-center text-slate-500 mt-2">Respuesta garantizada en menos de 24 horas.</p>
-            
+
             {status === "success" && (
-                <p className="text-green-400 text-sm text-center mt-2">Gracias por contactarnos. Te responderemos a la brevedad.</p>
+              <p className="text-green-400 text-sm text-center mt-2">Gracias por contactarnos. Te responderemos a la brevedad.</p>
             )}
-             {status === "error" && (
-                <p className="text-red-400 text-sm text-center mt-2">Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo más tarde.</p>
+            {status === "error" && (
+              <p className="text-red-400 text-sm text-center mt-2">Hubo un problema al enviar tu mensaje. Por favor, intenta de nuevo más tarde.</p>
             )}
           </form>
         </motion.div>

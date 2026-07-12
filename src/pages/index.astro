@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Hero } from '../components/Hero';
+import { Services } from '../components/Services';
+import { About } from '../components/About';
+import { FAQ } from '../components/FAQ';
+import { BlogSection } from '../components/BlogSection';
+import { Contact } from '../components/Contact';
+import { getCollection } from 'astro:content';
+
+const title = "Automatización con IA y n8n para empresas | ConnectologyIA";
+const description = "Automatizamos procesos, atención y operaciones con agentes de IA, n8n y Python. Soluciones a medida para empresas en Perú y Latinoamérica.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ConnectologyIA",
+  "url": "https://connectologyia.pages.dev",
+  "logo": "https://connectologyia.pages.dev/favicon.png",
+  "email": "connectologyaia@gmail.com",
+};
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+allPosts.sort((a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf());
+const latestBlogs = allPosts.slice(0, 3).map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  excerpt: post.data.excerpt || post.data.description,
+  date: post.data.datePublished.toISOString(),
+  imageUrl: post.data.image
+}));
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <main id="main-content">
+    <Hero client:only="react" />
+    <Services client:only="react" />
+    <About client:only="react" />
+    <FAQ client:only="react" />
+    <BlogSection blogs={latestBlogs} client:only="react" />
+    <Contact client:only="react" />
+  </main>
+</Layout>

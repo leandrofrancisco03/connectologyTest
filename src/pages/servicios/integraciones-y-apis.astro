@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Code, CheckCircle2 } from 'lucide-react';
+import { Contact } from '../../components/Contact';
+
+const title = "Integraciones y Desarrollo de APIs | ConnectologyIA";
+const description = "Conectamos tus sistemas corporativos, bases de datos y herramientas de terceros mediante integraciones de APIs seguras y escalables.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="bg-indigo-500/10 w-16 h-16 rounded-xl flex items-center justify-center">
+          <Code className="w-8 h-8 text-indigo-400" />
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+          Integraciones y APIs
+        </h1>
+      </div>
+      
+      <div class="prose prose-invert prose-lg max-w-none mb-16">
+        <p class="text-xl text-slate-300">
+          Rompemos los silos de información en tu empresa. Desarrollamos integraciones robustas para asegurar que todos tus sistemas se comuniquen de manera fluida y en tiempo real.
+        </p>
+
+        <h2 class="text-2xl font-bold text-white mt-12 mb-6">Nuestras Soluciones</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-indigo-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Desarrollo de APIs REST y GraphQL:</strong> Creamos endpoints seguros para que tus aplicaciones internas puedan consultar y enviar datos.</span>
+          </li>
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-indigo-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Integración de Pasarelas de Pago:</strong> Conexión con Stripe, MercadoPago, PayPal, etc., garantizando transacciones seguras.</span>
+          </li>
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-indigo-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Sincronización de Bases de Datos:</strong> Mantenemos la consistencia de datos entre sistemas legados (On-Premise) y plataformas Cloud.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 mt-16 pt-16">
+      <Contact client:only="react" />
+    </div>
+  </main>
+</Layout>

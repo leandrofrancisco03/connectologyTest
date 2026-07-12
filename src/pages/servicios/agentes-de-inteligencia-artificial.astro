@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Bot, CheckCircle2 } from 'lucide-react';
+import { Contact } from '../../components/Contact';
+
+const title = "Servicios de Agentes de IA | ConnectologyIA";
+const description = "Implementación de Agentes Inteligentes autónomos con LangChain y LangGraph para atención al cliente y procesos internos.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="bg-cyan-500/10 w-16 h-16 rounded-xl flex items-center justify-center">
+          <Bot className="w-8 h-8 text-cyan-400" />
+        </div>
+        <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+          Agentes de Inteligencia Artificial
+        </h1>
+      </div>
+      
+      <div class="prose prose-invert prose-lg max-w-none mb-16">
+        <p class="text-xl text-slate-300">
+          Transformamos la forma en que tu empresa opera mediante la implementación de Agentes IA capaces de tomar decisiones, usar herramientas y aprender de la información de tu negocio.
+        </p>
+
+        <h2 class="text-2xl font-bold text-white mt-12 mb-6">¿Qué podemos construir para tu empresa?</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-cyan-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Agentes de Atención al Cliente:</strong> IA que no solo responde preguntas frecuentes, sino que puede agendar citas, verificar estados de pedidos o procesar reembolsos.</span>
+          </li>
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-cyan-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Asistentes Internos (Copilotos):</strong> Agentes conectados a tus bases de datos, Notion o Google Drive para ayudar a tus empleados a encontrar información al instante.</span>
+          </li>
+          <li class="flex items-start">
+            <CheckCircle2 className="w-6 h-6 text-cyan-400 mr-3 shrink-0 mt-0.5" />
+            <span><strong>Agentes Autónomos de Ventas:</strong> Sistemas que califican leads en tiempo real a través de WhatsApp o Web y los registran en tu CRM.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 mt-16 pt-16">
+      <Contact client:only="react" />
+    </div>
+  </main>
+</Layout>

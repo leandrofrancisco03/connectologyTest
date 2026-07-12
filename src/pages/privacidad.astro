@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { PrivacyPolicy } from '../views/PrivacyPolicy';
+
+const title = "Política de Privacidad | ConnectologyIA";
+const description = "Política de privacidad y manejo de datos de ConnectologyIA.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <PrivacyPolicy client:visible />
+  </main>
+</Layout>

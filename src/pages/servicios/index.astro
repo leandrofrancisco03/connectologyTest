@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Services } from '../../components/Services';
+
+const title = "Servicios de automatización con IA y n8n | ConnectologyIA";
+const description = "Implementamos agentes de IA, workflows con n8n, integraciones y automatizaciones con Python para optimizar los procesos de tu empresa.";
+---
+
+<Layout title={title} description={description}>
+  <main id="main-content" class="pt-24 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-extrabold text-white text-center mb-8">Nuestros Servicios</h1>
+      <p class="text-xl text-slate-400 text-center max-w-3xl mx-auto mb-16">
+        Descubre cómo podemos ayudarte a transformar tu empresa con nuestras soluciones de automatización e inteligencia artificial.
+      </p>
+    </div>
+    <Services client:only="react" />
+  </main>
+</Layout>
