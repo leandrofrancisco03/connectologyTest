@@ -1,19 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { Services } from '../../components/Services';
-
-const title = "Servicios de automatización con IA y n8n | ConnectologyIA";
-const description = "Implementamos agentes de IA, workflows con n8n, integraciones y automatizaciones con Python para optimizar los procesos de tu empresa.";
+import ServiceCards from '../../components/ServiceCards.astro';
 ---
-
-<Layout title={title} description={description}>
-  <main id="main-content" class="pt-24 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-extrabold text-white text-center mb-8">Nuestros Servicios</h1>
-      <p class="text-xl text-slate-400 text-center max-w-3xl mx-auto mb-16">
-        Descubre cómo podemos ayudarte a transformar tu empresa con nuestras soluciones de automatización e inteligencia artificial.
-      </p>
-    </div>
-    <Services client:only="react" />
-  </main>
+<Layout title="Automatización e inteligencia artificial en Perú | ConnectologyIA" description="Automatización con n8n y Python, agentes de IA para web y Telegram, WhatsApp API oficial e integraciones para reducir tareas manuales en tu empresa." breadcrumbs={[{ name: 'Inicio', url: '/' }, { name: 'Servicios', url: '/servicios' }]}>
+<main id="main-content" class="page-main shell"><header class="page-heading"><span class="eyebrow">Tecnología al servicio de tu operación</span><h1>Conecta herramientas.<br /><span class="gradient-text">Recupera tiempo.</span></h1><p>Trabajamos con empresas de Perú que necesitan reducir tareas manuales, atender mejor y conectar sus datos. Elegimos la tecnología a partir del proceso.</p></header><ServiceCards /><aside class="callout"><h2>¿Por dónde conviene comenzar?</h2><p>Un proceso frecuente, con reglas claras y un resultado medible suele ser el mejor primer paso.</p><a href="/contacto" class="button">Revisemos tu caso ↗</a></aside></main>
 </Layout>

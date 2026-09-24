@@ -1,0 +1,10 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/site';
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+---
+<article class="post-card">
+  <a href={`/blog/${post.id}`} class="post-cover" tabindex="-1" aria-hidden="true"><img src={post.data.image || '/og/connectologyia.png'} alt="" width="1200" height="630" loading="lazy" decoding="async" /></a>
+  <div class="post-card-body"><span class="eyebrow">{post.data.category}</span><h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2><p>{post.data.excerpt || post.data.description}</p><div class="post-meta"><time datetime={post.data.datePublished.toISOString()}>{formatDate(post.data.datePublished)}</time><a href={`/blog/${post.id}`} aria-label={`Leer ${post.data.title}`}>Leer guía ↗</a></div></div>
+</article>

@@ -1,13 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { PrivacyPolicy } from '../views/PrivacyPolicy';
-
-const title = "Política de Privacidad | ConnectologyIA";
-const description = "Política de privacidad y manejo de datos de ConnectologyIA.";
 ---
-
-<Layout title={title} description={description}>
-  <main id="main-content" class="pt-24 pb-16">
-    <PrivacyPolicy client:visible />
-  </main>
+<Layout title="Política de privacidad | ConnectologyIA" description="Información sobre los datos de contacto y solicitudes gestionadas por ConnectologyIA, así como el canal para consultas y eliminación de datos.">
+<main id="main-content" class="page-main shell"><article class="prose narrow"><h1 class="text-4xl mb-8">Política de privacidad</h1><p>Actualizada el 23 de septiembre de 2026.</p><p>Esta página describe el uso de los datos que nos facilitas para consultar por los servicios de ConnectologyIA y el tratamiento asociado a nuestras integraciones.</p><h2>Datos de contacto</h2><p>Cuando envías una consulta podemos recibir tu nombre, correo, teléfono opcional y mensaje. Los utilizamos para responder tu solicitud, evaluar el servicio que necesitas y dar seguimiento a esa conversación.</p><h2>Canales y proveedores</h2><p>El sitio se aloja en Cloudflare. Las consultas pueden llegar por correo, WhatsApp o un formulario conectado a un servicio de automatización. Cada canal puede procesar datos técnicos necesarios para funcionar. Los enlaces a WhatsApp abren un servicio externo sujeto a sus propias condiciones.</p><h2>Integraciones empresariales</h2><p>Las integraciones con Meta u otras plataformas acceden a la información autorizada para la funcionalidad acordada, como mensajes o datos de solicitudes. El alcance de acceso y las condiciones de tratamiento de cada proyecto se definen con el cliente.</p><h2>Consultas y eliminación</h2><p>Puedes solicitar información, corrección o eliminación de los datos que hayas compartido escribiendo a <a href="mailto:connectologyaia@gmail.com">connectologyaia@gmail.com</a>. Indica el canal por el que nos contactaste para poder localizar tu solicitud.</p><h2>Cambios</h2><p>Actualizaremos esta página cuando cambien los canales o prácticas aquí descritas, indicando la fecha de la revisión.</p></article></main>
 </Layout>

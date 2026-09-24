@@ -1,16 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { About } from '../components/About';
-
-const title = "Sobre ConnectologyIA | Expertos en automatización e IA";
-const description = "Conoce a ConnectologyIA y nuestra forma de crear automatizaciones, agentes de IA e integraciones a medida para empresas de Perú y Latinoamérica.";
 ---
-
-<Layout title={title} description={description}>
-  <main id="main-content" class="pt-24 pb-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-      <h1 class="text-4xl font-extrabold text-white text-center">Sobre Nosotros</h1>
-    </div>
-    <About client:visible />
-  </main>
+<Layout title="Sobre ConnectologyIA: automatización e IA en Perú" description="Conoce cómo trabajamos: diagnóstico de procesos, automatización con n8n y Python, agentes de IA y documentación para empresas de Perú." breadcrumbs={[{ name: 'Inicio', url: '/' }, { name: 'Nosotros', url: '/sobre-nosotros' }]}>
+<main id="main-content" class="page-main shell"><header class="page-heading"><span class="eyebrow">ConnectologyIA · Perú</span><h1>Tecnología que entiende<br /><span class="gradient-text">cómo trabajas.</span></h1><p>Ayudamos a conectar herramientas y reducir tareas repetitivas mediante automatización con n8n, Python y agentes de inteligencia artificial.</p></header><div class="split-section"><section class="prose"><h2>Nuestro enfoque</h2><p>Antes de elegir una herramienta, revisamos el proceso: quién lo inicia, qué datos necesita, qué errores aparecen y cómo se valida el resultado. A partir de eso definimos una solución con un alcance entendible.</p><p>Trabajamos en automatizaciones, agentes para web, Telegram y WhatsApp, e integraciones mediante APIs. También desarrollamos sistemas web básicos cuando sirven para operar o supervisar esos procesos.</p><p>La automatización debe dejar claro qué hace el sistema, qué decide una persona y cómo actuar ante una excepción. No todos los pasos necesitan IA ni todas las tareas conviene automatizarlas.</p></section><section class="info-card"><h2>Qué buscamos en cada proyecto</h2><ul class="check-list"><li>Un problema específico y una forma de medirlo.</li><li>Accesos limitados a lo que necesita la integración.</li><li>Pruebas con errores y situaciones reales del proceso.</li><li>Documentación y reglas para la intervención humana.</li></ul></section></div><section class="prose narrow"><h2>Quién publica nuestras guías</h2><p>El Equipo ConnectologyIA firma el contenido editorial del blog. Publicamos criterios de implementación y ejemplos didácticos sobre las soluciones que ofrecemos. Identificamos las fuentes técnicas y distinguimos los ejemplos de los resultados de clientes.</p><p>Si detectas una información desactualizada, escríbenos a <a href="mailto:connectologyaia@gmail.com">connectologyaia@gmail.com</a> indicando la guía y el punto a revisar.</p><p><a href="/blog">Explora nuestras guías</a> o <a href="/servicios">conoce los servicios de automatización</a>.</p></section><aside class="callout"><h2>Conozcamos tu operación</h2><p>El mejor punto de partida es una tarea que puedas describir y medir.</p><a href="/contacto" class="button">Solicitar evaluación ↗</a></aside></main>
 </Layout>

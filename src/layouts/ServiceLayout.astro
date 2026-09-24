@@ -1,0 +1,22 @@
+---
+import Layout from './Layout.astro';
+import { services } from '../data/services';
+import { publishedPosts } from '../lib/posts';
+import { absoluteUrl } from '../lib/site';
+interface Props { slug: string; }
+const service = services.find(s => s.slug === Astro.props.slug);
+if (!service) throw new Error('Servicio desconocido');
+const posts = (await publishedPosts()).filter(post => (service.posts as readonly string[]).includes(post.id));
+const schema = { '@type': 'Service', '@id': absoluteUrl('/servicios/' + service.slug + '#service'), name: service.title, description: service.description, url: absoluteUrl('/servicios/' + service.slug), provider: { '@id': absoluteUrl('/#organization') }, areaServed: { '@type': 'Country', name: 'Perú' }, serviceType: service.label };
+---
+<Layout title={service.title + ' | ConnectologyIA'} description={service.description} schema={schema} breadcrumbs={[{ name: 'Inicio', url: '/' }, { name: 'Servicios', url: '/servicios' }, { name: service.label, url: '/servicios/' + service.slug }]}>
+  <main id="main-content" class="page-main shell">
+    <nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/servicios">Servicios</a><span>/</span><span aria-current="page">{service.label}</span></nav>
+    <header class="page-heading"><span class="eyebrow">Soluciones para empresas de Perú · {service.number}</span><h1>{service.title}</h1><p>{service.intro}</p><a class="button" href="/contacto">Evaluar mi proceso ↗</a></header>
+    <section class="section"><h2 class="section-title">Dónde podemos ayudarte</h2><div class="cards-grid">{service.cases.map(([title, text]) => <article class="info-card"><h3>{title}</h3><p>{text}</p></article>)}</div></section>
+    <section class="split-section"><div><span class="eyebrow">Un alcance claro desde el inicio</span><h2>Qué incluye la solución</h2><ul class="check-list">{service.deliverables.map(item => <li>{item}</li>)}</ul></div><div class="info-card"><h2>Qué necesitamos para comenzar</h2><p>{service.requirements}</p><h3>Cómo se define el presupuesto</h3><p>{service.cost}</p><a class="text-link" href="/recursos/calculadora-ahorro-automatizacion">Estimar el valor del tiempo recuperado ↗</a></div></section>
+    <section class="section narrow"><h2 class="section-title">Preguntas antes de empezar</h2>{service.faq.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}</section>
+    <aside class="callout"><h2>Empieza por un proceso concreto</h2><p>Cuéntanos qué se repite, cuántas veces ocurre y qué herramientas utilizas. Revisamos contigo si tiene sentido automatizarlo.</p><a href="/contacto" class="button">Solicitar evaluación gratuita ↗</a></aside>
+    <section class="split-section"><div><h2>Guías para decidir mejor</h2><ul class="resource-list">{posts.map(post => <li><a href={'/blog/' + post.id}>{post.data.title} ↗</a></li>)}</ul><a href={service.source} class="text-link">{service.sourceName} ↗</a></div><div><h2>Conecta esta solución con</h2><ul class="resource-list">{services.filter(s => s.slug !== service.slug).map(s => <li><a href={'/servicios/' + s.slug}>{s.label} ↗</a></li>)}</ul></div></section>
+  </main>
+</Layout>

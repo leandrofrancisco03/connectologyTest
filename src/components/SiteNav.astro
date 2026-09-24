@@ -1,0 +1,11 @@
+---
+const links = [ ['/servicios', 'Servicios'], ['/blog', 'Blog'], ['/recursos', 'Recursos'], ['/sobre-nosotros', 'Nosotros'] ];
+const path = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/\/$/, '') || '/';
+---
+<header class="site-header">
+  <nav class="site-nav shell" aria-label="Navegación principal">
+    <a href="/" class="brand" aria-label="ConnectologyIA, inicio"><img src="/favicon.png" width="36" height="36" alt="" />Connectology<span>IA</span></a>
+    <div class="desktop-links">{links.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}<a href="/contacto" class="button button-small">Hablemos <span aria-hidden="true">↗</span></a></div>
+    <details class="mobile-menu"><summary>Menú <span aria-hidden="true">☰</span></summary><div>{links.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}<a href="/contacto">Contacto ↗</a></div></details>
+  </nav>
+</header>

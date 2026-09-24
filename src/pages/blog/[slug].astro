@@ -1,156 +1,31 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import { Calendar, User, Tag, ArrowRight } from 'lucide-react';
-import { Contact } from '../../components/Contact';
-
-export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
-}
-
-import type { CollectionEntry } from 'astro:content';
-
-type Props = { entry: CollectionEntry<'blog'> };
-const { entry } = Astro.props as Props;
-import { render } from 'astro:content';
-const { Content } = await render(entry);
-
-const siteUrl = "https://connectologyia.pages.dev";
-const canonical = `${siteUrl}/blog/${entry.slug}`;
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": entry.data.title,
-  "description": entry.data.description,
-  "image": entry.data.image ? `${siteUrl}${entry.data.image}` : `${siteUrl}/favicon.png`,
-  "datePublished": entry.data.datePublished.toISOString(),
-  "dateModified": entry.data.dateModified ? entry.data.dateModified.toISOString() : entry.data.datePublished.toISOString(),
-  "author": {
-    "@type": "Person",
-    "name": entry.data.author
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "ConnectologyIA",
-    "logo": {
-      "@type": "ImageObject",
-      "url": `${siteUrl}/favicon.png`
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": canonical
-  }
-};
+import PostCard from '../../components/PostCard.astro';
+import { render, type CollectionEntry } from 'astro:content';
+import { publishedPosts } from '../../lib/posts';
+import { absoluteUrl, formatDate } from '../../lib/site';
+import { services } from '../../data/services';
+export async function getStaticPaths() { return (await publishedPosts()).map(entry => ({ params: { slug: entry.id }, props: { entry } })); }
+interface Props { entry: CollectionEntry<'blog'>; }
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const canonical = absoluteUrl(`/blog/${entry.id}`);
+const related = (await publishedPosts()).filter(post => post.id !== entry.id).sort((a, b) => Number(entry.data.relatedPosts?.includes(b.id) || b.data.category === entry.data.category) - Number(entry.data.relatedPosts?.includes(a.id) || a.data.category === entry.data.category)).slice(0, 3);
+const minutes = Math.max(1, Math.ceil((entry.body || '').split(/\s+/).length / 200));
+const schema = { '@type': 'BlogPosting', '@id': canonical + '#article', headline: entry.data.title, description: entry.data.description, image: absoluteUrl(entry.data.image || '/og/connectologyia.png'), datePublished: entry.data.datePublished.toISOString(), dateModified: (entry.data.dateModified || entry.data.datePublished).toISOString(), author: { '@type': 'Organization', name: entry.data.author, url: absoluteUrl('/sobre-nosotros'), '@id': absoluteUrl('/#organization') }, publisher: { '@id': absoluteUrl('/#organization') }, mainEntityOfPage: { '@id': canonical + '#webpage' }, inLanguage: 'es-PE', articleSection: entry.data.category };
 ---
-
-<Layout 
-  title={entry.data.seoTitle || `${entry.data.title} | ConnectologyIA`} 
-  description={entry.data.description} 
-  canonical={canonical}
-  ogType="article"
-  ogImage={entry.data.image}
->
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    <meta property="article:published_time" content={entry.data.datePublished.toISOString()} />
-    {entry.data.dateModified && <meta property="article:modified_time" content={entry.data.dateModified.toISOString()} />}
-    <meta property="article:author" content={entry.data.author} />
-  </Fragment>
-
-  <main id="main-content" class="pt-24 pb-16">
-    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Breadcrumbs -->
-      <nav class="flex text-sm text-slate-400 mb-8" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3">
-          <li class="inline-flex items-center">
-            <a href="/" class="hover:text-cyan-400">Inicio</a>
-          </li>
-          <li>
-            <div class="flex items-center">
-              <span class="mx-2">/</span>
-              <a href="/blog" class="hover:text-cyan-400">Blog</a>
-            </div>
-          </li>
-          <li aria-current="page">
-            <div class="flex items-center">
-              <span class="mx-2">/</span>
-              <span class="text-slate-300 truncate max-w-[200px] md:max-w-none">{entry.data.title}</span>
-            </div>
-          </li>
-        </ol>
-      </nav>
-
-      <header class="mb-12">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-6">
-          {entry.data.title}
-        </h1>
-        
-        <div class="flex flex-wrap items-center gap-6 text-sm text-slate-400 border-b border-slate-800 pb-8">
-          <div class="flex items-center gap-2">
-            <User className="w-4 h-4 text-cyan-400" />
-            <span>{entry.data.author}</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-cyan-400" />
-            <time datetime={entry.data.datePublished.toISOString()}>
-              {entry.data.datePublished.toLocaleDateString('es-PE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          </div>
-          <div class="flex items-center gap-2">
-            <Tag className="w-4 h-4 text-cyan-400" />
-            <span>{entry.data.category}</span>
-          </div>
-        </div>
-      </header>
-
-      {entry.data.image && (
-        <figure class="mb-12 rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
-          <img 
-            src={entry.data.image} 
-            alt={entry.data.imageAlt || entry.data.title} 
-            class="w-full h-auto max-h-[500px] object-cover"
-          />
-        </figure>
-      )}
-
-      <div class="prose prose-invert prose-lg max-w-none prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-img:rounded-xl">
-        <Content />
-      </div>
-
-      <!-- Etiquetas -->
-      {entry.data.tags && entry.data.tags.length > 0 && (
-        <div class="mt-12 pt-8 border-t border-slate-800">
-          <h3 class="text-lg font-semibold text-white mb-4">Etiquetas:</h3>
-          <div class="flex flex-wrap gap-2">
-            {entry.data.tags.map((tag: string) => (
-              <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded-full text-sm">
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- CTA -->
-      <div class="mt-16 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-2xl p-8 text-center">
-        <h3 class="text-2xl font-bold text-white mb-4">¿Necesitas implementar esta automatización en tu negocio?</h3>
-        <p class="text-slate-300 mb-6 max-w-2xl mx-auto">
-          En ConnectologyIA diseñamos estrategias e implementamos agentes de Inteligencia Artificial a la medida de tus procesos.
-        </p>
-        <a href="/contacto" class="inline-block bg-cyan-500 text-white font-medium px-8 py-3 rounded-full hover:bg-cyan-600 transition-colors">
-          Solicitar evaluación gratuita
-        </a>
+<Layout title={entry.data.seoTitle || `${entry.data.title} | ConnectologyIA`} description={entry.data.description} canonical={canonical} ogType="article" ogImage={entry.data.image} schema={schema} breadcrumbs={[{ name: 'Inicio', url: '/' }, { name: 'Blog', url: '/blog' }, { name: entry.data.title, url: `/blog/${entry.id}` }]}>
+  <Fragment slot="head"><meta property="article:published_time" content={entry.data.datePublished.toISOString()} /><meta property="article:modified_time" content={(entry.data.dateModified || entry.data.datePublished).toISOString()} /></Fragment>
+  <main id="main-content" class="page-main shell">
+    <nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span>/</span><a href="/blog">Blog</a><span>/</span><span aria-current="page">{entry.data.category}</span></nav>
+    <article>
+      <header class="article-heading"><span class="eyebrow">{entry.data.category} · {minutes} min de lectura</span><h1>{entry.data.title}</h1><p class="article-lead">{entry.data.description}</p><div class="article-byline"><a href="/sobre-nosotros">{entry.data.author}</a><span>Publicado: <time datetime={entry.data.datePublished.toISOString()}>{formatDate(entry.data.datePublished)}</time></span>{entry.data.dateModified && <span>Actualizado: <time datetime={entry.data.dateModified.toISOString()}>{formatDate(entry.data.dateModified)}</time></span>}</div></header>
+      <div class="article-grid">
+        <aside class="toc"><nav aria-label="Índice del artículo"><strong>En esta guía</strong><ol>{headings.filter(h => h.depth === 2).map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol></nav><a class="text-link" href="/recursos/calculadora-ahorro-automatizacion">Estima tu ahorro ↗</a></aside>
+        <div class="article-body prose"><Content /><aside class="editor-note"><strong>Sobre esta guía</strong><p>Contenido editorial de ConnectologyIA. Los ejemplos ilustran decisiones de implementación; no representan resultados de clientes. Consulta las fuentes enlazadas para revisar condiciones y documentación actualizadas.</p></aside></div>
       </div>
     </article>
+    <aside class="callout"><span class="eyebrow">De la idea al proceso</span><h2>¿Cómo se aplicaría a tu empresa?</h2><p>Cuéntanos qué tareas se repiten, qué herramientas usas y qué resultado quieres conseguir.</p><a class="button" href="/contacto">Solicitar evaluación gratuita ↗</a><div class="topic-links">{(entry.data.relatedServices || []).map(service => <a href={`/servicios/${service}`}>{services.find(item => item.slug === service)?.label || service.replaceAll('-', ' ')}</a>)}</div></aside>
+    <section class="section"><h2 class="section-title">Sigue conectando ideas</h2><div class="cards-grid">{related.map(post => <PostCard post={post} />)}</div></section>
   </main>
 </Layout>

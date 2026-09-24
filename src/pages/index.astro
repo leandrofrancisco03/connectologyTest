@@ -1,49 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Hero } from '../components/Hero';
-import { Services } from '../components/Services';
-import { About } from '../components/About';
-import { FAQ } from '../components/FAQ';
-import { BlogSection } from '../components/BlogSection';
-import { Contact } from '../components/Contact';
-import { getCollection } from 'astro:content';
-
-const title = "Automatización con IA y n8n para empresas | ConnectologyIA";
-const description = "Automatizamos procesos, atención y operaciones con agentes de IA, n8n y Python. Soluciones a medida para empresas en Perú y Latinoamérica.";
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "ConnectologyIA",
-  "url": "https://connectologyia.pages.dev",
-  "logo": "https://connectologyia.pages.dev/favicon.png",
-  "email": "connectologyaia@gmail.com",
-};
-
-const allPosts = await getCollection('blog', ({ data }) => {
-  return data.draft !== true;
-});
-allPosts.sort((a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf());
-const latestBlogs = allPosts.slice(0, 3).map(post => ({
-  slug: post.slug,
-  title: post.data.title,
-  excerpt: post.data.excerpt || post.data.description,
-  date: post.data.datePublished.toISOString(),
-  imageUrl: post.data.image
-}));
+import ServiceCards from '../components/ServiceCards.astro';
+import PostCard from '../components/PostCard.astro';
+import { publishedPosts } from '../lib/posts';
+const posts = (await publishedPosts()).slice(0, 3);
+const faqs = [
+['¿Qué procesos puede automatizar ConnectologyIA?', 'Conectamos formularios, CRM, reportes y canales de atención. Implementamos flujos con n8n y Python, agentes de IA para web y Telegram, e integraciones con la API oficial de WhatsApp. El alcance depende de tus herramientas y reglas de negocio.'],
+['¿Trabajan con empresas pequeñas en Perú?', 'Sí. Empezamos por un proceso acotado y una métrica de mejora. La evaluación inicial permite decidir si la automatización tiene sentido para el volumen y los recursos de tu empresa.'],
+['¿Cuánto cuesta una automatización?', 'Depende de las integraciones, el volumen, las excepciones y el soporte. La propuesta separa implementación de costos recurrentes como hosting, APIs y modelos de IA.'],
+['¿Puedo seguir usando WhatsApp Business?', 'Evaluamos la coexistencia con la API oficial según los requisitos y la elegibilidad vigentes de Meta. No todas las cuentas o números tienen las mismas opciones de incorporación.'],
+['¿El agente de IA reemplaza a mi equipo?', 'Está diseñado para apoyar tareas concretas. Definimos cuándo responder, cuándo pedir confirmación y cuándo derivar a una persona, con límites de acceso a la información.'],
+];
 ---
-
-<Layout title={title} description={description}>
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-  </Fragment>
-
-  <main id="main-content">
-    <Hero client:only="react" />
-    <Services client:only="react" />
-    <About client:only="react" />
-    <FAQ client:only="react" />
-    <BlogSection blogs={latestBlogs} client:only="react" />
-    <Contact client:only="react" />
-  </main>
+<Layout title="Automatización con n8n y agentes IA en Perú | ConnectologyIA" description="Reduce tareas manuales con n8n, Python y agentes de IA. Integramos web, Telegram, WhatsApp API oficial y tus sistemas para empresas de Perú.">
+<main id="main-content">
+<section class="hero-section"><div class="shell hero-grid"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> Automatización e IA para empresas de Perú</span><h1>Tu equipo tiene<br />mejores cosas<br /><span class="gradient-text">que repetir tareas.</span></h1><p>Conectamos tus herramientas con n8n, Python y agentes de IA para reducir trabajo manual y dar continuidad a tu atención.</p><div class="hero-actions"><a href="/contacto" class="button">Evaluar mi proceso <span aria-hidden="true">↗</span></a><a href="/servicios" class="button button-secondary">Explorar soluciones</a></div><p class="hero-note">Un proceso claro. Una solución a medida. Un resultado que puedas medir.</p></div>
+<div class="workflow-card" aria-label="Ejemplo de flujo: solicitud, validación, acción y revisión"><div class="workflow-top"><span class="status-dot"></span> Así se conecta tu operación <span class="muted">/ EJEMPLO</span></div><div class="workflow-node"><span class="node-icon">01</span><div><strong>Llega una solicitud</strong><small>Web · WhatsApp · Telegram</small></div><span class="node-mark">↙</span></div><div class="flow-line"></div><div class="workflow-node highlighted"><span class="node-icon">02</span><div><strong>n8n conecta el proceso</strong><small>Valida · clasifica · consulta</small></div><span class="node-mark">✳</span></div><div class="flow-line"></div><div class="workflow-branches"><div><span>↳</span><strong>Tu sistema</strong><small>CRM actualizado</small></div><div><span>↳</span><strong>Tu equipo</strong><small>Decisiones y excepciones</small></div></div><div class="workflow-bottom"><span>Menos pasos manuales</span><span class="text-cyan-300">Más visibilidad ↗</span></div></div>
+</div><div class="shell technology-strip"><span>Conectamos tu stack</span><strong>n8n</strong><strong>Python</strong><strong>WhatsApp API</strong><strong>Telegram</strong><strong>Webhooks & APIs</strong></div></section>
+<section class="shell section" id="servicios"><div class="section-heading"><div><span class="eyebrow">01 / Lo que podemos conectar</span><h2>Automatiza lo repetitivo.<br />Enfócate en lo que importa.</h2></div><p>Desde una tarea que consume horas hasta un flujo completo de atención. Cada solución parte de tu operación real.</p></div><ServiceCards /></section>
+<section class="process-section"><div class="shell section"><div class="section-heading"><div><span class="eyebrow">02 / Así trabajamos</span><h2>Primero el proceso.<br /><span class="gradient-text">Después la tecnología.</span></h2></div><a href="/sobre-nosotros" class="text-link">Conoce nuestro enfoque ↗</a></div><div class="process-grid">{[['01', 'Entendemos', 'Mapeamos la tarea, tus herramientas, excepciones y el tiempo que consume.'], ['02', 'Construimos', 'Implementamos un flujo acotado con pruebas y reglas de intervención humana.'], ['03', 'Medimos', 'Comparamos tiempos y errores, documentamos y definimos los siguientes pasos.']].map(([n, title, text]) => <article><span>{n}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+<section class="shell section"><div class="resource-banner"><div><span class="eyebrow">Herramienta gratuita · Sin registro</span><h2>¿Cuánto tiempo podrías recuperar?</h2><p>Estima horas liberadas y el valor de ese tiempo con tus propios datos.</p></div><a href="/recursos/calculadora-ahorro-automatizacion" class="button button-secondary">Calcular ahorro ↗</a></div></section>
+<section class="shell section"><div class="section-heading"><div><span class="eyebrow">03 / Ideas que puedes aplicar</span><h2>Aprende antes de automatizar.</h2></div><a class="text-link" href="/blog">Todas las guías ↗</a></div><div class="cards-grid">{posts.map(post => <PostCard post={post} />)}</div></section>
+<section class="shell section narrow"><span class="eyebrow">Respuestas claras</span><h2 class="section-title">Antes de dar el primer paso</h2>{faqs.map(([q, a]) => <details class="faq-item"><summary>{q}</summary><p>{a}</p></details>)}</section>
+<section class="shell"><div class="callout"><span class="eyebrow">Tu próximo proceso puede ser más simple</span><h2>Cuéntanos qué tarea<br />te gustaría dejar de repetir.</h2><p>Revisamos tus herramientas y te proponemos un punto de partida concreto.</p><a href="/contacto" class="button">Hablemos de tu proceso ↗</a></div></section>
+</main>
 </Layout>

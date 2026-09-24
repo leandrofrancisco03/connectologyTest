@@ -1,0 +1,4 @@
+---
+import { services } from '../data/services';
+---
+<div class="service-grid">{services.map(service => <article class="service-card"><span class="service-number">{service.number} /</span><h3><a href={`/servicios/${service.slug}`}>{service.label}</a></h3><p>{service.intro}</p><a class="text-link" href={`/servicios/${service.slug}`}>Explorar solución <span aria-hidden="true">↗</span></a></article>)}</div>

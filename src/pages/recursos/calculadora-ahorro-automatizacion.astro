@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Calculadora de ahorro por automatización | ConnectologyIA" description="Estima horas recuperadas y valor mensual al automatizar procesos. Calculadora en soles con costos recurrentes e implementación, sin registro." breadcrumbs={[{ name: 'Inicio', url: '/' }, { name: 'Recursos', url: '/recursos' }, { name: 'Calculadora de ahorro', url: '/recursos/calculadora-ahorro-automatizacion' }]}>
+<main id="main-content" class="page-main shell"><header class="page-heading"><span class="eyebrow">Recurso gratuito · Cálculo local en tu navegador</span><h1>¿Cuánto tiempo<br /><span class="gradient-text">podrías recuperar?</span></h1><p>Cambia los valores del ejemplo para estimar el valor de las horas liberadas. Los resultados no representan ahorro de caja garantizado.</p></header>
+<div class="split-section"><form id="savings-form" class="form-grid" aria-label="Datos de la estimación">
+<label class="field">Tareas al mes<input name="tasks" type="number" value="400" min="0" max="10000000" step="1" required /></label>
+<label class="field">Minutos por tarea<input name="minutes" type="number" value="8" min="0" max="100000" step="0.1" required /></label>
+<label class="field">Costo por hora (S/)<input name="hourly" type="number" value="25" min="0" max="1000000" step="0.01" required /></label>
+<label class="field">Tiempo que se automatiza (%)<input name="automated" type="number" value="60" min="0" max="100" step="1" required /><small>Reserva tiempo para revisión y excepciones.</small></label>
+<label class="field">Costo mensual de operar (S/)<input name="monthly" type="number" value="200" min="0" max="100000000" step="0.01" required /><small>Hosting, licencias, APIs y mantenimiento.</small></label>
+<label class="field">Implementación inicial (S/)<input name="setup" type="number" value="2400" min="0" max="100000000" step="0.01" required /><small>Importe ilustrativo, no es una tarifa.</small></label>
+<button class="button field-full" type="submit">Calcular estimación ↗</button>
+</form><section class="result-panel" aria-labelledby="results-title"><h2 id="results-title">Tu escenario estimado</h2><div id="results" role="status" aria-live="polite"><p>Completa los datos y pulsa «Calcular estimación».</p></div><p class="form-note" style="margin-top: 20px">Las horas liberadas solo generan valor si se aprovechan. No incluyen impuestos ni costos no declarados.</p></section></div>
+<noscript><p class="info-card">Activa JavaScript para calcular automáticamente. Puedes usar las fórmulas que aparecen debajo.</p></noscript>
+<section class="prose narrow"><h2>Qué calcula esta herramienta</h2><ul><li><strong>Horas recuperadas:</strong> tareas al mes × minutos por tarea ÷ 60 × porcentaje automatizado.</li><li><strong>Valor bruto mensual:</strong> horas recuperadas × costo por hora.</li><li><strong>Valor neto estimado:</strong> valor bruto − costo mensual de operación.</li><li><strong>Recuperación simple:</strong> implementación ÷ valor neto, solo cuando este es positivo.</li></ul><p>El ejemplo inicial representa 32 horas recuperadas, S/ 800 de valor bruto y S/ 600 netos al mes. La recuperación simple sería de 4 meses. Son supuestos didácticos, no resultados de clientes.</p><h2>Cómo evitar una estimación optimista</h2><p>Usa tiempos medidos, reduce el porcentaje automatizado si hay muchas excepciones e incluye supervisión y mantenimiento. Compara un escenario conservador con uno intermedio antes de aprobar una inversión.</p><p>Descarga la <a href="/recursos/plantilla-diagnostico-automatizacion.md" download>plantilla de diagnóstico</a> y consulta <a href="/blog/cuanto-cuesta-automatizar-procesos-peru">qué incluye el costo de automatizar un proceso</a>.</p></section><aside class="callout"><h2>Contrasta tu estimación con un proceso real</h2><p>Revisamos los sistemas, las excepciones y el alcance antes de proponer la implementación.</p><a href="/contacto" class="button">Evaluar mi automatización ↗</a></aside></main>
+</Layout>
+<script>
+import { calculateSavings } from '../../lib/savings';
+const form = document.querySelector<HTMLFormElement>('#savings-form');
+const output = document.querySelector<HTMLElement>('#results');
+const money = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN', maximumFractionDigits: 0 });
+form?.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!output || !form.reportValidity()) return;
+  const data = new FormData(form);
+  const result = calculateSavings({ tasks: Number(data.get('tasks')), minutes: Number(data.get('minutes')), hourly: Number(data.get('hourly')), automated: Number(data.get('automated')), monthly: Number(data.get('monthly')), setup: Number(data.get('setup')) });
+  output.replaceChildren();
+  if (!result) { output.textContent = 'Revisa los valores: deben ser números no negativos y el porcentaje no puede superar 100.'; return; }
+  const rows = [
+    [result.hours.toLocaleString('es-PE', { maximumFractionDigits: 1 }) + ' h', 'Horas recuperadas al mes'],
+    [money.format(result.gross), 'Valor bruto mensual'],
+    [money.format(result.net), 'Valor neto mensual estimado'],
+    [result.payback === null ? 'Sin recuperación estimada' : result.payback === 0 ? 'Sin inversión inicial' : result.payback.toLocaleString('es-PE', { maximumFractionDigits: 1 }) + ' meses', 'Recuperación simple de la implementación'],
+  ];
+  for (const [value, label] of rows) { const row = document.createElement('div'); row.className = 'result-item'; const strong = document.createElement('strong'); strong.className = 'result-number'; strong.textContent = value; const span = document.createElement('span'); span.textContent = label; row.append(strong, span); output.append(row); }
+});
+</script>
