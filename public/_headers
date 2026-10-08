@@ -7,6 +7,10 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=0, s-maxage=3600
+
 https://:preview.connectologyia.pages.dev/*
   X-Robots-Tag: noindex
 

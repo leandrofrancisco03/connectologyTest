@@ -35,6 +35,8 @@ for (const page of pages.values()) {
  const canonical = select('link').filter(n => attr(n, 'rel') === 'canonical');
  const expected = new URL(route, origin).href;
  assert(canonical.length === 1 && attr(canonical[0], 'href') === expected, route + ': canonical incorrecto');
+ const sitemapLink = select('link').filter(n => attr(n, 'rel') === 'sitemap');
+ assert(sitemapLink.length === 1 && attr(sitemapLink[0], 'href') === '/sitemap.xml', route + ': enlace de sitemap incorrecto');
  assert(attr(oneMeta('property','og:url')[0], 'content') === expected, route + ': og:url incorrecto');
  const noindex = attr(oneMeta('name', 'robots')[0], 'content')?.includes('noindex');
  assert(route === '/404' ? noindex : !noindex, route + ': directiva de indexación incorrecta');
@@ -82,8 +84,14 @@ for (const page of pages.values()) {
   }
  }
 }
-const sitemap = await readFile(join(root,'sitemap-0.xml'),'utf8');
+const sitemap = await readFile(join(root,'sitemap.xml'),'utf8');
+assert(sitemap.includes('<urlset') && !sitemap.includes('<sitemapindex'), 'Debe existir un único urlset');
 const sitemapUrls = new Set([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => new URL(m[1]).href));
+for (const url of sitemapUrls) {
+ const path = new URL(url).pathname;
+ assert(!path.endsWith('.html') && (path === '/' || !path.endsWith('/')), 'Formato de URL incorrecto en sitemap: ' + url);
+ assert(!/(^|\/)(404|api|preview)(\/|$)/.test(path) && path !== '/rss.xml', 'Ruta excluida presente en sitemap: ' + url);
+}
 for (const url of expectedSitemap) assert(sitemapUrls.has(url), 'Falta en sitemap: ' + url);
 for (const url of sitemapUrls) assert(expectedSitemap.has(url), 'URL inesperada en sitemap: ' + url);
 for (const route of pages.keys()) if (!['/', '/404'].includes(route)) assert(incoming.has(route), 'Página huérfana: ' + route);
@@ -93,7 +101,8 @@ assert(!rss.includes('undefined'), 'URL inválida en RSS');
 const home = pages.get('/').html;
 assert(!home.includes('<astro-island'), 'La portada no debe depender de islas hidratadas');
 const robots = await readFile(join(root,'robots.txt'),'utf8');
-assert(robots.includes(origin + '/sitemap-index.xml'), 'robots: sitemap incorrecto');
-assert(!(await walk(root)).includes(join(root,'sitemap.xml')), 'Sitemap estático duplicado');
+assert(robots.includes(origin + '/sitemap.xml'), 'robots: sitemap incorrecto');
+const generatedFiles = await walk(root);
+assert(!generatedFiles.includes(join(root,'sitemap-index.xml')) && !generatedFiles.includes(join(root,'sitemap-0.xml')), 'No deben generarse sitemaps fragmentados');
 if (failures.length) { console.error(failures.join('\n')); process.exitCode = 1; }
 else console.log(`SEO OK: ${pages.size} páginas, ${articles} artículos, ${schemas} grafos JSON-LD y ${links} enlaces/recursos internos. Canonicals, RSS, sitemap, anclas y páginas huérfanas verificados.`);

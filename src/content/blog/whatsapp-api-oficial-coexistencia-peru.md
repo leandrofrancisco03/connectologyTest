@@ -5,6 +5,7 @@ description: "Qué revisar antes de conectar WhatsApp Business con n8n y agentes
 category: "WhatsApp y agentes"
 tags: ["whatsapp-api-oficial","agentes-de-inteligencia-artificial"]
 datePublished: "2026-09-23"
+dateModified: "2026-10-08"
 image: "/og/whatsapp.png"
 relatedServices: ["whatsapp-api-oficial","agentes-de-inteligencia-artificial"]
 ---
@@ -57,6 +58,8 @@ También cuenta el trabajo humano. Un agente puede clasificar solicitudes, pero 
 Prueba mensajes duplicados, consultas sin respuesta, clientes que piden hablar con una persona y fallos del CRM. Verifica que una conversación atendida manualmente no vuelva al bot por error y que el equipo reciba contexto suficiente.
 
 El criterio de éxito no debe limitarse a que el mensaje salga. Mide registros correctos, derivaciones resueltas y tiempo de atención. Si necesitas implementar este flujo, revisa nuestro servicio de [WhatsApp API oficial y coexistencia](/servicios/whatsapp-api-oficial).
+
+Cuando el número y la modalidad ya están definidos, continúa con la arquitectura para [integrar WhatsApp API, CRM y n8n](/blog/integrar-whatsapp-api-crm-n8n-arquitectura): cubre webhooks, deduplicación, estados y transferencia a una persona.
 
 ## Preguntas frecuentes
 

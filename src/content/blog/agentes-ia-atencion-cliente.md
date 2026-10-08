@@ -5,7 +5,7 @@ description: "Cómo diseñar un agente de IA útil para atención al cliente: fu
 category: "WhatsApp y agentes"
 tags: ["agentes-de-inteligencia-artificial","whatsapp-api-oficial"]
 datePublished: "2026-05-28"
-dateModified: "2026-09-23"
+dateModified: "2026-10-08"
 image: "/og/agentes.png"
 relatedServices: ["agentes-de-inteligencia-artificial","whatsapp-api-oficial"]
 ---
@@ -71,3 +71,5 @@ La [Bot API de Telegram](https://core.telegram.org/bots/api) y las [políticas d
 Empieza por responder sobre una fuente aprobada y registrar solicitudes que una persona atenderá. Añade consultas a sistemas cuando puedas validar permisos; incorpora escrituras solo después de comprobar el flujo.
 
 En ConnectologyIA implementamos [agentes de IA para web, Telegram y WhatsApp](/servicios/agentes-de-inteligencia-artificial). Antes de construirlos, definimos contigo qué pueden hacer, qué no y cómo sabremos si ayudan al equipo.
+
+Antes de escalar el volumen, revisa cómo [reducir costos de API de IA](/blog/reducir-costos-api-ia-agentes) midiendo el costo por resultado y manteniendo controles de calidad.

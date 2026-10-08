@@ -5,7 +5,7 @@ description: "Compara n8n, Zapier y Make según integraciones, volumen, mantenim
 category: "Automatización de procesos"
 tags: ["automatizacion-con-n8n"]
 datePublished: "2026-06-15"
-dateModified: "2026-09-23"
+dateModified: "2026-10-08"
 image: "/og/n8n.png"
 relatedServices: ["automatizacion-con-n8n"]
 ---
@@ -68,3 +68,5 @@ Si el caso es captación comercial, puedes usar el diseño de [formulario a CRM 
 Anota por qué se eligió la herramienta, sus límites conocidos, quién la administra y cuándo revisarás la decisión. Así el proyecto no depende solo del criterio de la persona que creó la primera versión.
 
 Una buena elección permite operar el proceso con claridad. La tecnología es una parte de esa decisión, junto con las reglas, las pruebas y las personas responsables.
+
+Para evaluar el trabajo posterior a la elección, revisa cómo implementar [observabilidad en n8n](/blog/observabilidad-logging-workflows-n8n-produccion) y cuándo usar [webhooks o polling](/blog/webhooks-vs-polling-automatizaciones). Ambos influyen directamente en mantenimiento y recuperación.

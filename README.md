@@ -33,7 +33,7 @@ La auditoría SEO comprueba el HTML de `dist`: H1, main, títulos y descripcione
 - Sitio estático: no necesita adaptador SSR, Functions ni servidor Node en producción.
 - Las rutas se generan como archivos HTML. Cloudflare sirve las URLs sin extensión; los canonicals eliminan `.html`.
 - `public/_headers`: cabeceras básicas, caché anual solo para assets con hash y noindex de subdominios de preview.
-- `public/_redirects`: el sitemap antiguo redirige al índice generado.
+- `src/pages/sitemap.xml.ts`: genera un único `/sitemap.xml` desde las páginas Astro y los artículos publicados.
 - Se conserva el archivo y la meta de verificación de Google existentes.
 
 No añadas una regla SPA `/* /index.html 200`: ocultaría los errores 404.
